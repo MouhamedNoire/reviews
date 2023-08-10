@@ -41,11 +41,38 @@ const randombtn = document.querySelector(".random-btn");
 
 //set starting item
 
-let currentItem = 0;
+let currentItem = 1;
 
 //load initial item
 window.addEventListener("DOMContentLoaded", function(){
-    let item = reviews[currentItem];
-    console.log(item);
-    console.log(img);
+    showPerson(currentItem);
+});
+
+
+
+function showPerson(person){
+    const item = reviews[person];
+    img.src = item.img;
+    author.textContent = item.name;
+    job.textContent = item.job;
+    info.textContent = item.text;
+}
+
+nextBtn.addEventListener('click' , () =>{
+    currentItem++;
+    if(currentItem > reviews.length -1)
+        currentItem = 0;
+    showPerson(currentItem);
+});
+
+prevBtn.addEventListener('click' , () =>{
+    currentItem--;
+    if(currentItem < 0)
+        currentItem = reviews.length-1;
+    showPerson(currentItem);
+});
+
+randombtn.addEventListener('click',() =>{
+    currentItem = Math.floor(Math.random()*reviews.length);
+    showPerson(currentItem);
 });
